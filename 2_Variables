@@ -1,0 +1,22 @@
+#Variables
+
+#Variable string
+my_string_variable = str("\nMy String variable")
+print(my_string_variable)
+
+#Variable entera
+my_int_variable = int(5)
+print(my_int_variable)
+
+#Variable booleana
+my_bool_variable = bool(True)
+print(my_bool_variable)
+
+#Variables en una sola línea
+nombre, apellido, edad = str("David"), str("Varela"), int(18)
+print("\nMe llamo", nombre, apellido,"y mi edad es de", edad, "años.")
+
+
+#Concatenación:
+#Se pueden poner variabes juntas separadas por una coma(,).
+print(my_string_variable, my_int_variable, my_bool_variable)
