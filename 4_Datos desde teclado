@@ -1,0 +1,6 @@
+#Datos desde teclado
+
+nombre = input("¿Cuál es tu nombre?: ")
+edad = input("¿Cuál es tu edad?: ")
+
+print("\nTu nombre es", nombre, "y tienes", edad, "años.")
