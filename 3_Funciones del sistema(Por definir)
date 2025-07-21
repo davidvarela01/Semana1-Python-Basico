@@ -1,0 +1,5 @@
+#Funciones del sistema
+
+#Función len()
+string = str("David")
+print(len(string))
