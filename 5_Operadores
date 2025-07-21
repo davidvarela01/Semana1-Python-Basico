@@ -1,0 +1,93 @@
+#Operadores
+
+#Operadores aritméticos
+print("\nOperadores aritméticos:")
+
+
+#Suma
+print("\n-Suma")
+print("1 + 2 = ", end = "")
+print(1 + 2)
+
+#Resta
+print("\n-Resta")
+print("1 - 2 = ", end = "")
+print(1 - 2)
+
+#Multiplicación
+print("\n-Multiplicación")
+print("1 * 2 = ", end = "")
+print(1 * 2)
+
+#División
+print("\n-División")
+print("1 / 2 = ", end = "")
+print(1 / 2)
+
+#División entera
+print("\n-División entera")
+print("1 // 2 = ", end = "")
+print(1 // 2)
+
+#Módulo
+print("\n-Módulo")
+print("1 % 2 = ", end = "")
+print(1 % 2)
+
+#Potencia
+print("\n-Potencia")
+print("1 ** 2 = ", end = "")
+print(1 ** 2)
+
+
+
+#Operadores comparativos
+print("\n\nOperadores comparativos:")
+
+
+#Mayor
+print("\n-Mayor")
+print("1 > 2 = ", end = "")
+print(1 > 2)
+
+#Menor
+print("\n-Menor")
+print("1 < 2 = ", end = "")
+print(1 < 2)
+
+#Mayor o igual
+print("\n-Mayor o igual")
+print("1 >= 2 = ", end = "")
+print(1 >= 2)
+
+#Menor o igual
+print("\n-Menor o igual")
+print("1 <= 2 = ", end = "")
+print(1 <= 2)
+
+#Igual
+print("\n-Igual")
+print("1 == 2 = ", end = "")
+print(1 == 2)
+
+#Diferente
+print("\n-Diferente")
+print("1 != 2 = ", end = "")
+print(1 != 2)
+
+
+
+#Operadores lógicos
+print("\n\nOperadores lógicos:\n")
+
+#and
+print("- 3 < 4 y 4 > 3 es ", end = "")
+print(3 < 4 and 4 > 3)
+
+#or
+print("\n- 3 = 4 o 4 < 3 es ", end = "")
+print(3 == 4 or 4 < 3)
+
+#not
+print("\n- No 3 < 4 o 3 > 4 es ", end = "")
+print(not 3 < 4)
