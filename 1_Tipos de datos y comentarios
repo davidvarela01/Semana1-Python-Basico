@@ -1,0 +1,19 @@
+#Esto es un comentario : Hola mundo
+
+#Strings con comilla simple, comilla doble y comilla triple.
+print("Hola Python\n")
+print('Hola Python\n')
+print("""Este es
+un comentario
+en varias
+líneas\n""")
+
+#Tipos de datos
+
+#type = Dice el tipo de dato.
+print(type("Hola Python\n")) #Tipo string().
+print(type(5)) #Tipo int().
+print(type(1.5)) #Tipo float().
+print(type(True)) #Tipo bool() True.
+print(type(False)) #Tipo bool() False.
+print(type(5 + 2j)) #Tipo complex().
