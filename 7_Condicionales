@@ -1,0 +1,35 @@
+#Condicionales
+
+
+#Condionales compuestos
+print("\n-Condicionales compuestos:")
+print("\nAdivina el número")
+numero = int(input("¿Qué número eliges?: "))
+
+if numero == 5:
+       print("Adivinaste el número, felicidades.")
+else:
+    print("No era ese, perdiste.")
+
+
+#Condionales Múltiples
+print("\n-Condicionales Multiples:")
+print("\nAdivina el número")
+numero = int(input("¿Qué número eliges?: "))
+
+if numero == 5:
+       print("Adivinaste el número, felicidades.")
+elif numero == 4 or numero == 6:
+    print("Casi pero no era.")
+elif numero >= 7:
+    print("Estuviste lejos")
+else:
+    print("No era ese, perdiste.")
+
+
+
+
+
+
+
+
