@@ -1,0 +1,93 @@
+#Bucles
+
+
+
+#While
+numero = 0
+print("\n-Bucle while:\n")
+#Se usan para hacer que un código se ejecute constantemente hasta que no cumpla con la condición de la variable.
+while numero < 10:
+        print("No se ha superado el límite.")
+        numero += 1
+else: #El bucle while se puede utilizar con un else:
+    print("\nSe ha superado el límite.")
+
+
+#While con break
+print("\n\n-While con break:\n")
+while numero <= 10:
+        print("No se ha superado el límite.")
+        numero -= 1
+        if numero == 5:
+            break #Break hace que el bucle while se deje de repetir.
+print("El programa se dejo de ejecutar")
+
+
+
+
+
+
+
+
+#For
+#El bucle for nos sirve para repetir un bloque de código por cada elemento de secuencia.
+
+print("\n\n-Bucle for:\n")
+variable = "David"
+for elemento in variable:
+    print(elemento)
+else: #El bucle for se puede utilizar con un else:
+    print("\nEl programa se dejo de ejecutar.")
+
+
+#For con break
+print("\n\n-For con break:\n")
+variable = "David"
+for elemento in variable:
+    print(elemento)
+    if elemento == "i":
+        break
+print("\nEl programa se dejo de ejecutar.")
+
+
+#For con continue
+print("\n\n-For con continue:\n")
+variable = "David"
+for elemento in variable:
+    print(elemento)
+    if elemento == "i": #Cuando el bucle llega a la "i" vuelve a repetir el bucle sin importar el código posterior.
+        continue #Continue hace que el bucle while se siga ejecutando.
+    print("El programa se ejecuta\n")
+
+
+
+
+
+
+
+
+
+#While con continue
+"""print("\n\n-While con continue:\n")
+while numero <= 10:
+        print("No se ha superado el límite.")
+        numero -= 1
+        if numero == 5:
+            continue #Continue hace que el bucle while se siga ejecutando.
+        print("El programa se dejo de ejecutar")
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
