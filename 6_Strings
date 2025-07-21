@@ -1,0 +1,82 @@
+#Strings
+
+
+
+
+#-Los strings se ponen entre comillas simples o dobles.
+print("\n-Strings: ")
+string = " David"
+string_1 = "Varela"
+print(string, string_1)
+
+#Los strings se pueden concatenar.
+print("\n-Concatenación de strings: ")
+print(" David " + "Varela")
+
+
+
+#-Format
+nombre = str("David")
+apellido = str("Varela")
+edad = int(18)
+#Cuando usas format se pone un par de llaves y al final la variable que quieras establecer.
+print("\n-Usando format()")
+print(" Mi nombre es {} {} y mi edad es {}".format(nombre, apellido, edad))
+
+
+
+#-%
+
+nombre = str("David")
+apellido = str("Varela")
+edad = int(18)
+#Tipos de porcentajes:
+# %s = str() \ %d = int() \ %f = float().
+#Cuando usas % se pone %s/%d/%f y al final la variable que quieras establecer.
+print("\n-Usando %")
+print(" Mi nombre es %s %s y mi edad es %d" %(nombre, apellido, edad))
+
+
+
+#-f"Strings"
+
+nombre = str("David")
+apellido = str("Varela")
+edad = int(18)
+#Cuando usas f"Strings" se pone un par de llaves y dentro de ellas la variable que quieras establecer.
+print('\n-Usando f"Strings"')
+print(f" Mi nombre es {nombre} {apellido} y mi edad es {edad}")
+
+
+
+#Desempaquetar caracteres
+
+nombre = str("David")
+a, b, c, d, e = nombre
+print('\n-Desempaquetar caracteres:')
+#Cuando quieras desemp. caracteres, creas una variable con el string y luego pones letras según cuantas letras tenga el string.
+print(a)
+print(b)
+print(c)
+print(d)
+print(e)
+
+
+
+#Invertir un String
+
+nombre = str("David")
+print('\n-Invertir un string:')
+#Hay que crear una variable inversa y al final escribir entre corchetes ::-1.
+inv_nombre = nombre[::-1]
+print(inv_nombre)
+
+
+
+#Evitar caracteres de un String
+
+nombre = str("David")
+print('\n-Evitar caracteres un string:')
+#Hay que crear una variable evitada y al final escribir entre corchetes int():int():int().
+evi_nombre = nombre[0:6:2]
+print(evi_nombre)
