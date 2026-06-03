@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Interés Compuesto</title>
+  <style>
+    :root {
+      --bg: #eefdf7;
+      --card: #ffffff;
+      --text: #10231d;
+      --muted: #60756d;
+      --line: #d9eee7;
+      --green: #19c79a;
+      --green-dark: #09906e;
+      --red: #d9384d;
+      --shadow: 0 18px 45px rgba(10, 80, 65, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #d9fff1 0, var(--bg) 42%, #f7fffc 100%);
+      color: var(--text);
+      padding: 24px;
+    }
+
+    .app {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: -0.05em;
+      line-height: 1.02;
+    }
+
+    .tag {
+      background: rgba(25, 199, 154, .12);
+      color: var(--green-dark);
+      border: 1px solid rgba(25, 199, 154, .25);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 26px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      font-weight: 800;
+      color: #36564d;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      border: 1.5px solid #cbe4dc;
+      border-radius: 16px;
+      padding: 14px 58px 14px 14px;
+      font-size: 17px;
+      color: var(--text);
+      background: #fbfffd;
+      outline: none;
+      transition: .15s ease;
+    }
+
+    input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(25, 199, 154, .15);
+    }
+
+    .suffix {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #789188;
+      font-weight: 800;
+      pointer-events: none;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      margin-top: 20px;
+      padding: 15px 16px;
+      font-size: 18px;
+      font-weight: 900;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      box-shadow: 0 14px 30px rgba(25, 199, 154, .25);
+    }
+
+    button:active { transform: translateY(1px); }
+
+    .mini {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .error {
+      color: var(--red);
+      font-weight: 850;
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    .headline {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 750;
+      margin-bottom: 8px;
+    }
+
+    .big {
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: .95;
+      letter-spacing: -0.07em;
+      font-weight: 950;
+      margin-bottom: 14px;
+    }
+
+    .subresult {
+      font-size: 18px;
+      color: #36564d;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      background: #f7fffc;
+      border-radius: 18px;
+      padding: 14px;
+      min-height: 86px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+      margin-bottom: 8px;
+    }
+
+    .metric strong {
+      font-size: 21px;
+      letter-spacing: -0.035em;
+    }
+
+    canvas {
+      width: 100%;
+      height: 330px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fbfffd;
+      display: block;
+    }
+
+    .table-wrap {
+      margin-top: 16px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      max-height: 330px;
+      background: #fbfffd;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child { text-align: left; }
+    th {
+      position: sticky;
+      top: 0;
+      background: #eafff7;
+      color: #36564d;
+      font-weight: 900;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    @media (max-width: 880px) {
+      body { padding: 14px; }
+      .layout { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: 1fr; }
+      canvas { height: 255px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div>
+        <h1>Calculadora de interés compuesto</h1>
+        <p class="mini">Calcula a qué edad llegas a tu meta según tu inversión inicial, aportación mensual y rentabilidad anual.</p>
+      </div>
+      <div class="tag">Funciona en móvil y ordenador</div>
+    </header>
+
+    <section class="layout">
+      <div class="card">
+        <label for="edadInicio">Edad de inicio</label>
+        <div class="input-wrap">
+          <input id="edadInicio" type="number" min="0" max="120" step="1" value="18" />
+          <span class="suffix">años</span>
+        </div>
+
+        <label for="meta">Meta de ahorro total</label>
+        <div class="input-wrap">
+          <input id="meta" type="number" min="1" step="1000" value="1000000" />
+          <span class="suffix">€</span>
+        </div>
+
+        <label for="inicial">Inversión inicial</label>
+        <div class="input-wrap">
+          <input id="inicial" type="number" min="0" step="100" value="10000" />
+          <span class="suffix">€</span>
+        </div>
+
+        <label for="mensual">Aportación mensual</label>
+        <div class="input-wrap">
+          <input id="mensual" type="number" min="0" step="50" value="1000" />
+          <span class="suffix">€</span>
+        </div>
+
+        <label for="tasa">Tasa de interés anual</label>
+        <div class="input-wrap">
+          <input id="tasa" type="number" step="0.1" value="7" />
+          <span class="suffix">%</span>
+        </div>
+
+        <button id="btn">Calcular</button>
+        <div id="error" class="error"></div>
+        <p class="mini">Se usa interés mensual equivalente: <b>(1 + tasa anual)^(1/12) - 1</b>. Las aportaciones se suman cada mes.</p>
+      </div>
+
+      <div class="card">
+        <div class="headline">Llegarías a tu meta aproximadamente a los</div>
+        <div id="edadResultado" class="big">—</div>
+        <div id="frase" class="subresult">Pon tus datos y pulsa calcular.</div>
+
+        <div class="metrics">
+          <div class="metric">
+            <span>Tiempo necesario</span>
+            <strong id="tiempo">—</strong>
+          </div>
+          <div class="metric">
+            <span>Total aportado por ti</span>
+            <strong id="aportado">—</strong>
+          </div>
+          <div class="metric">
+            <span>Intereses generados</span>
+            <strong id="intereses">—</strong>
+          </div>
+        </div>
+
+        <canvas id="grafica" width="900" height="330"></canvas>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Edad</th>
+                <th>Capital</th>
+                <th>Aportado</th>
+                <th>Intereses</th>
+              </tr>
+            </thead>
+            <tbody id="tabla"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const ids = ['edadInicio', 'meta', 'inicial', 'mensual', 'tasa'];
+    const fmtEUR = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    const fmtNum = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 1 });
+
+    function euros(n) { return fmtEUR.format(Math.round(n)); }
+
+    function leerNumero(id) {
+      const raw = document.getElementById(id).value;
+      const value = Number(String(raw).replace(',', '.'));
+      return value;
+    }
+
+    function validar(edad, meta, inicial, mensual, tasa) {
+      if ([edad, meta, inicial, mensual, tasa].some(n => Number.isNaN(n))) return 'Hay un dato que no es número. Revísalo.';
+      if (edad < 0 || edad > 120) return 'La edad de inicio debe estar entre 0 y 120.';
+      if (meta <= 0) return 'La meta debe ser mayor que 0 €.';
+      if (inicial < 0 || mensual < 0) return 'La inversión inicial y la aportación mensual no pueden ser negativas.';
+      if (tasa <= -100) return 'La tasa anual no puede ser -100% o menos.';
+      if (inicial < meta && mensual === 0 && tasa <= 0) return 'Con 0 € mensuales y una tasa igual o menor a 0%, no llegarás a la meta.';
+      return '';
+    }
+
+    function calcular() {
+      const edad = leerNumero('edadInicio');
+      const meta = leerNumero('meta');
+      const inicial = leerNumero('inicial');
+      const mensual = leerNumero('mensual');
+      const tasaAnual = leerNumero('tasa') / 100;
+      const error = document.getElementById('error');
+      error.textContent = '';
+
+      const fallo = validar(edad, meta, inicial, mensual, tasaAnual);
+      if (fallo) {
+        error.textContent = fallo;
+        return;
+      }
+
+      let capital = inicial;
+      let aportado = inicial;
+      let meses = 0;
+      const maxMeses = 120 * 12;
+      const tasaMensual = Math.pow(1 + tasaAnual, 1 / 12) - 1;
+      const puntos = [{ meses, edad: edad, capital, aportado }];
+
+      while (capital < meta && meses < maxMeses) {
+        capital = capital * (1 + tasaMensual);
+        capital += mensual;
+        aportado += mensual;
+        meses += 1;
+        if (meses % 12 === 0 || capital >= meta) {
+          puntos.push({ meses, edad: edad + meses / 12, capital, aportado });
+        }
+      }
+
+      if (capital < meta) {
+        error.textContent = 'Con esos datos no llegas a la meta en 120 años. Sube la aportación mensual, sube la inversión inicial o baja la meta.';
+      }
+
+      mostrar({ edad, meta, inicial, mensual, tasaAnual, capital, aportado, meses, puntos });
+    }
+
+    function mostrar(r) {
+      const anios = Math.floor(r.meses / 12);
+      const mesesResto = r.meses % 12;
+      const edadFinal = r.edad + r.meses / 12;
+      const intereses = r.capital - r.aportado;
+
+      document.getElementById('edadResultado').textContent = `${fmtNum.format(edadFinal)} años`;
+      document.getElementById('frase').textContent = r.meses === 0
+        ? 'Ya has llegado a la meta con tu inversión inicial.'
+        : `Necesitarías ${anios} años y ${mesesResto} meses para llegar a ${euros(r.meta)}.`;
+      document.getElementById('tiempo').textContent = `${anios} años y ${mesesResto} meses`;
+      document.getElementById('aportado').textContent = euros(r.aportado);
+      document.getElementById('intereses').textContent = euros(intereses);
+
+      dibujar(r.puntos, r.meta);
+      pintarTabla(r.puntos);
+    }
+
+    function dibujar(puntos, meta) {
+      const canvas = document.getElementById('grafica');
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      const padL = 64, padR = 20, padT = 20, padB = 42;
+      const w = W - padL - padR, h = H - padT - padB;
+      ctx.clearRect(0, 0, W, H);
+
+      if (puntos.length < 2) return;
+
+      const maxY = Math.max(meta, ...puntos.map(p => p.capital)) * 1.05;
+      const maxX = Math.max(1, ...puntos.map(p => p.meses));
+
+      ctx.font = '13px system-ui';
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#d9eee7';
+      ctx.fillStyle = '#60756d';
+
+      for (let i = 0; i <= 4; i++) {
+        const y = padT + h - (h * i / 4);
+        ctx.beginPath();
+        ctx.moveTo(padL, y);
+        ctx.lineTo(padL + w, y);
+        ctx.stroke();
+        ctx.fillText(euros(maxY * i / 4).replace(',00', ''), 6, y + 4);
+      }
+
+      function x(p) { return padL + (p.meses / maxX) * w; }
+      function y(p) { return padT + h - (p.capital / maxY) * h; }
+
+      ctx.strokeStyle = '#19c79a';
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      puntos.forEach((p, i) => {
+        if (i === 0) ctx.moveTo(x(p), y(p));
+        else ctx.lineTo(x(p), y(p));
+      });
+      ctx.stroke();
+
+      const last = puntos[puntos.length - 1];
+      ctx.fillStyle = '#19c79a';
+      ctx.beginPath();
+      ctx.arc(x(last), y(last), 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#60756d';
+      ctx.fillText(`Edad ${fmtNum.format(puntos[0].edad)}`, padL, H - 12);
+      ctx.fillText(`Edad ${fmtNum.format(last.edad)}`, Math.max(padL, padL + w - 90), H - 12);
+    }
+
+    function pintarTabla(puntos) {
+      const tbody = document.getElementById('tabla');
+      tbody.innerHTML = '';
+      const filas = puntos.filter((_, i) => i === 0 || i === puntos.length - 1 || puntos[i].meses % 12 === 0);
+      filas.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${fmtNum.format(p.edad)}</td><td>${euros(p.capital)}</td><td>${euros(p.aportado)}</td><td>${euros(p.capital - p.aportado)}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('btn').addEventListener('click', calcular);
+    ids.forEach(id => document.getElementById(id).addEventListener('input', calcular));
+    calcular();
+  </script>
+</body>
+</html>
